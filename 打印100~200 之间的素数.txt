@@ -1,0 +1,22 @@
+#include<stdio.h>
+void prime(int n)
+{
+	int i = 0;
+	for (i = 2; i < n; i++)
+	{
+		if (n%i == 0)
+			break;
+	}
+	if (i == n)
+		printf("%d ", n);
+}
+int main()
+{
+	int i = 1;
+	for (; i <= 100; i++)
+	{
+		prime(i);
+	}
+	printf("\n");
+	system("pause");
+}
