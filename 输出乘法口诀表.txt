@@ -1,0 +1,18 @@
+#include<stdio.h>
+void mul_table()
+{
+	int i = 1, j = 1;
+	for (i = 1; i <= 9; i++)
+	{
+		for (j = 1; j <= i; j++)
+		{
+			printf("%-2d*%2d =%2d  ", i, j, i*j);
+		}
+		printf("\n");
+	}
+}
+int main()
+{
+	mul_table();
+	system("pause");
+}
