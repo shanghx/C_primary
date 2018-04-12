@@ -1,0 +1,36 @@
+#include<stdio.h>
+void  delete_same(int arr[], int size,int data)
+{
+	int i = 0, len = 0;
+	int count = 0;
+	for (; i < size; i++)
+	{
+		if (arr[i] == data)
+			count++;
+		else
+			arr[i - count] = arr[i];
+	}
+	len = size;
+	size = size - count;
+	for (i = size - 1; i < len; i++)
+	{
+		arr[i] = 0;
+	}
+}
+int main()
+{
+	int arr[10] = { 1,2,5,6,9,8,2,2,7,0 };
+	int i = 0;
+	for (; i < 10; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+	delete_same(arr, 10, 2);
+	for (i = 0; i < 10; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	system("pause");
+	return 0;
+}
