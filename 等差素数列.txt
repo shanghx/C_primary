@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+bool isprime(int n);
+int next(int n);
+int main()
+{
+	int count=0;
+	long long a[10];
+	int rate = 12;
+	int begin = 2;
+	int index = 0;
+	int num;
+		for (begin=2; begin<10000; begin = next(begin)) {
+			for(rate=12;rate<10000;rate++){
+				for (num = begin; num < 10000000; num+=rate) {
+					if (isprime(num)) {
+						a[index] = num; 
+						index++;
+						count++;
+						if (index == 10) {
+							for (int k = 0; k < 10; k++) 
+								cout << a[k] << " ";
+							cout << endl;
+							goto out;
+						}
+					}
+					else {
+						index = 0; break;
+					}
+				}
+			}
+		}
+	out:
+		cout << begin <<" "<< rate <<" "<<num<< endl;
+	cout <<count<< "Done";
+	return 0;
+}
+
+bool isprime(int n) {
+	int i = 2;
+	for (; i < n/2 ; i++) {
+		if (n%i == 0)break;
+	}
+	if (i == n/2) return true;
+	else return false;
+}
+
+int next(int n) {
+	for (int i = n + 1; i <= n + 10000; i++) {
+		if (isprime(i)) {
+			return i;
+			break;
+		}
+	}
+
+}
