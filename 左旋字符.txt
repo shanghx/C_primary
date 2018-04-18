@@ -1,0 +1,81 @@
+#define _CRT_SECURE_NO_WARNINGS  1
+#include<stdio.h>
+#include<assert.h>
+#include<string.h>
+#include<stdlib.h>
+void left_move_1(char *arr,int n, int k)//arr是传来的字符数组，n是字符长度，k是左旋字符的个数
+{
+    int i = 0, j = 0;
+    char a;
+    assert(arr);
+    k = k%n;//这条语句是减少循环次数，当左移字符个数大于字符串本身大小，左移动作就会重复
+    for (j = 1; j <= k; j++)//外层循环控制左旋字符的个数
+    {
+        a = arr[0];//将第一个字符保存
+        for (i = 1; i < n; i++)
+        {
+
+            arr[i - 1] = arr[i];//将第二个以及起后面的字符左移一位
+        }
+        arr[i-1] = a;//将第一个字符赋值给最后一个字符
+    }
+}
+static void swap(char *x, char *y)//交换两个字符
+{
+    assert(x);
+    assert(y);
+    (*x) ^= (*y);
+    (*y) ^= (*x);
+    (*x) ^= (*y);
+}
+static void reverse_string(char *start, char *end)//逆转函数，将字符串逆转
+{
+    assert(start);
+    assert(end);
+    while (start < end)
+    {
+        swap(start, end);
+        start++; end--;
+    }
+}
+void left_move_2(char *arr,int n,int k)
+{
+        assert(arr);
+        k = k%n;
+        reverse_string(arr, arr + k-1);//逆转前面部分字符串
+        reverse_string(arr+k, arr + n-1);//逆转后面部分字符串
+        reverse_string(arr, arr + n-1);//整体逆转字符串
+
+}
+void left_move_3(char *arr, int n, int k)
+{
+
+    char *str = (char *)malloc(n * 2 + 1);//先开辟空间
+    char *p = str;//保存头指针，用于最后的释放
+    strcpy(str, arr); //先拷贝
+    strcat(str, arr);//在链接上原来字符串，就等于拷贝两次
+    k = k%n;
+    while(n--)//循环，控制赋值的次数
+    {
+        *arr = *(str + k );
+        arr++; str++;//两个字符指针都往后移，逐个赋值。
+    }
+    free(p);//释放掉不用的空间
+}
+int main()
+{
+    int k = 0;
+    char arr[] = "1234abcd";
+    printf("左旋前的字符串是:%s\n", arr);
+    int n = strlen(arr);
+    printf("输入左旋字符的个数:");
+    scanf("%d", &k);
+    left_move_1(arr, n, k);
+    printf("方法1:左旋后的字符串是:%s\n", arr);
+    left_move_2(arr, n, k);
+    printf("方法2:左旋后的字符串是:%s\n", arr);
+    left_move_3(arr, n,k);
+    printf("方法3:左旋后的字符串是:%s\n", arr);
+    system("pause");
+    return 0;
+}
