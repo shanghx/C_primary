@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int q=0,w=0,e=0,r=0,i;
+	 string a;
+	getline(cin,a);
+	for(i=0;a[i]!='\0';i++)
+	if((a[i]>='A'&&a[i]<='Z')||(a[i]>='a'&&a[i]<='z'))
+	q=q+1;
+	else	
+	if
+	(a[i]>=48&&a[i]<=57)
+	w=w+1;
+	else	
+	if(a[i]==32)
+	e=e+1;
+	else
+	 r=r+1;	
+	cout<<q<<" "<<w<<" "<<e<<" "<<r;
+	return 0;
+ } 
