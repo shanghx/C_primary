@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	int i,j,x,y,t;
+	char a[i],b[j];
+	printf("plese input first sting:");
+	gets(a);
+	printf("please input second string:");
+	gets(b);
+	x=strlen(a);
+	y=strlen(b);
+	//a[x]=' '; 
+	for(i=0,j=0;i<=y,j<y;i++,j++)
+		a[x+i]=b[j];
+	printf("%s",a);
+	return 0; 
+} 
