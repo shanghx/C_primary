@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<assert.h>
+void My_strcpy(char *dest, const char *src)
+{
+	int i;
+	for (i = 0; src[i] != '\0'; i++)
+	{
+		dest[i] = src[i];
+		src++;
+		dest++;
+	}
+	dest[i] = '\0';
+}
+
+char *My_strcpy2(char *dest, const char *src)
+{
+	assert(src != NULL);//  src == NULL
+	char *p = dest;
+	while (*dest++ = *src++)
+	{
+	}
+	return p;
+}
+//字符串长度
+int My_strlen(const char *src)
+{
+	int len = 0;
+	while (*src != '\0')
+	{
+		len++;
+		src++;
+	}
+	return len;
+}
+//字符串连接   
+char *My_strcat(char *dest, const char *src)//将src连接到dest后面
+{
+	//参数检查
+	assert(src != NULL && dest != NULL);
+	/*if(strlen(dest)+strlen(src)  >= strlen(dest))
+	{
+	return NULL;
+	}*/
+	char *p = dest;
+	while (*dest != '\0')
+	{
+		dest++;
+	}
+	while (*dest++ = *src++)
+	{
+	}
+	return p;
+}
+//字符串的比较                        
+int  My_strcmp(const char *str1, const char *str2)
+{
+	assert(str1 != NULL && str2 != NULL);
+	int tmp;//差值  
+	while (((tmp = *str1 - *str2) == 0) && (*str2 != '\0'))//false
+	{
+		str1++;
+		str2++;
+	}
+	return tmp;
+}
