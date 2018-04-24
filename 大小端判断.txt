@@ -1,0 +1,18 @@
+//¥Û–°∂À£∫   
+#include<stdio.h>   
+int main()
+{
+	int a = 1;
+	char ch = 'a';
+	char *pp = &ch;
+
+	char*p = (char *)&a;//   
+	if(*p == 1)
+		printf("is little\n");
+	}
+	else
+	{
+		printf("is big\n");
+	}
+	return 0;
+}
