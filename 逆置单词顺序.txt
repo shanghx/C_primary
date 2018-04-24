@@ -1,0 +1,59 @@
+#include<stdio.h> 
+#include<assert.h>
+void Reverse(char *start,char *end)
+{
+	char tmp;
+	while(start < end)
+	{
+		tmp = *start;
+		*start = *end;
+		*end = tmp;
+		start++;
+		end--;
+	}
+
+}
+
+char* ReverseSentence(char *str)
+{
+	assert(str != NULL);
+	char *pbegin = str;
+	char *pend = str;
+	//1、pend走到\0之前
+	while(*pend != '\0')
+	{
+		pend++;
+	}
+	--pend;
+	Reverse(pbegin,pend);//句子逆置了   单词未逆置
+	//逆置单词
+	pbegin = str;
+	pend = str;
+
+	while(*pbegin != '\0')
+	{
+		if(*pbegin == ' ')
+		{
+			pbegin++;
+			pend++;
+		}
+		else if(*pend == ' ' || *pend == '\0')
+		{
+			Reverse(pbegin,--pend);//pend本身就是减
+			pbegin = ++pend;//也一样
+		}
+		else
+		{
+			pend++;
+		}
+	}
+	return str;
+}
+
+int main()
+{
+	char str[] = "this is a string";
+	ReverseSentence(str);
+	printf("%s\n",str);
+	return 0;
+}
