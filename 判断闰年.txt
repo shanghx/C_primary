@@ -1,0 +1,11 @@
+#include<iostream>
+using namespace std;
+//#define LEAP_YEAR(y)  (y%400==0?"L":y%4==0?(y%100!=0?"L":"N"):"N")
+#define LEAP_YEAR(y)  (y%400==0?"L":y%4!=0?"N":y%100!=0?"L":"N")
+int main()
+{
+	int year;
+	cin>>year;	
+	cout<<LEAP_YEAR(year);
+	return 0;
+} 
