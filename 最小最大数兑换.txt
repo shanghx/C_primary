@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int i,j,a[10],temp,swap,m,n;
+	for(i=0;i<10;i++)
+	cin>>a[i];
+	for(i=0,m=0,n=9;i<10;i++)
+	{
+	if(a[m]>a[i])
+	m=i;
+		{
+		temp=a[m];
+		a[m]=a[0];
+		a[0]=temp;
+		}
+	if(a[n]<a[i])
+		n=i;
+		{
+		swap=a[n];
+		a[n]=a[9];
+		a[9]=swap;
+		}
+	}	
+	//for(j=0,n=9;j<10;j++)				
+	for(i=0;i<10;i++)
+	cout<<a[i]<<" ";
+	return 0;
+}
