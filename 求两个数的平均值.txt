@@ -1,0 +1,8 @@
+int main()
+{
+int a,b,aver;
+scanf("%d %d",&a£¬&b);
+aver=(a-b)/2+b;
+printf("%d",aver);
+return 0;
+}
