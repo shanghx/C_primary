@@ -1,0 +1,31 @@
+//ì³²¨ÄÇÆõ
+
+//µü´ú
+int Fabonacio1(int n)
+{
+	int f1 = 1;
+	int f2 = 1;
+	int f3 = 1;
+	for(int i = 2;i < n;i++)
+	{
+		f3 = f1+f2;
+		f1 = f2;
+		f2 = f3;
+	}
+	return f3;
+}
+//   µÝ¹é
+int Fabonacio(int n)
+{
+	int tmp;
+	if(n == 1 || n==2)
+	{
+		tmp = 1;
+		return tmp;
+	}
+	else
+	{
+		tmp = Fabonacio(n-1)+Fabonacio(n-2);
+		return tmp;
+	}
+}
