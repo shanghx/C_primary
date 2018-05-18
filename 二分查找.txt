@@ -1,0 +1,25 @@
+int BinerSearch(int *arr,int len,int key)
+{
+	int low = 0;
+	int high = len-1;
+	int mid = 0;
+	while(low <= high)
+	{
+		//mid = (low+high)/2;//-1
+		//mid = low+(high-low)/2;
+		//mid = (low+1)/2+(high+1)/2;
+		mid = (low+high)>>1;//-1  01111111111111111111
+		if(arr[mid] > key)
+		{
+			high = mid-1;
+		}else if(arr[mid] == key)
+		{
+			return mid;
+		}
+		else
+		{
+			low = mid+1;
+		}
+	}
+	return -1;//’“ ß∞‹¡À£°£°£°
+}
