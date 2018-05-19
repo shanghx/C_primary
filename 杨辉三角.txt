@@ -1,0 +1,35 @@
+//杨辉三角
+#define ROW 5
+void MagicFun(int (*brr)[ROW],int row)
+{
+	assert(ROW%2 != 0);//奇数
+	brr[0][ROW/2] = 1;
+	int prevRow = 0;//当前行
+	int prevCol = ROW/2;//当前列
+	//2---n*n 9
+	for(int i = 2;i <= ROW*ROW;i++)
+	{
+		//有数据   放到当前行的下一行
+		if(brr[(prevRow-1+ROW)%ROW][(prevCol+1)%ROW] != 0)
+		{
+			prevRow = (prevRow+1)%ROW;//下一行
+		}
+		else
+		{
+			prevRow =  (prevRow-1+ROW)%ROW ;
+			prevCol  =   (prevCol+1)%ROW;
+		}
+		brr[prevRow][prevCol] = i;
+	}
+}
+void Show(int (*brr)[ROW],int row)
+{
+	for(int i = 0;i < row;i++)
+	{
+		for(int j = 0;j < row;j++)
+		{
+			printf("%d\t ",brr[i][j]);
+		}
+		printf("\n");
+	}
+}
