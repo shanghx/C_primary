@@ -1,0 +1,404 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+           //声明函数 
+void show_begin();
+void show_chioce(struct student *head);
+struct student *creat(void) ;
+void found(struct student *head); 
+void search(struct student *head);
+void dele(struct student *head);
+void add(struct student *head);
+void average(struct student* p);
+void print(struct student*head);
+void statistics(struct student*head);                      //声明统计函数 
+void change(struct student*head);
+#define LEN sizeof(struct student)
+
+void show_begin()	          //欢迎页 
+{
+	printf("               **********************************************************************\n");
+	printf("               *                                                                    *\n");
+	printf("               *                                                                    *\n");
+	printf("               *                      欢迎进入西安工业大学学生管理系统              *\n");
+	printf("               *                                                                    *\n");
+	printf("               *                                                                    *\n");
+	printf("               *                                                                    *\n");
+	printf("               *                                                                    *\n");
+	printf("               **********************************************************************\n");
+	printf("                                           按任意键进入                              \n");
+	getchar();
+	system("cls");                            //清屏函数 
+}
+
+void show_chioce(struct student *head)               //选择界面 
+	{
+int n;
+printf(" 学生信息管理系统\n"); 
+printf(" 作者：shang\n"); 
+printf("-------------------MENU-----------------\n"); 
+printf(" 1.登记学生信息\n"); 
+printf(" 2.查询学生信息\n");
+printf(" 3.删除学生信息\n");
+printf(" 4.修改学生信息\n"); 
+printf(" 5.添加学生信息\n"); 
+printf(" 6.统计学生信息\n"); 
+printf(" 7.输出全部信息\n");
+printf(" 8.写入文件\n");
+printf(" 0.返回主界面\n");
+printf(" 请选择：");
+scanf("%d",&n);
+system("cls");
+switch (n) 
+{
+case 1: head=creat();
+		show_chioce(head);
+		break;                         //输入学生信息
+case 2: search(head);
+		show_chioce(head);
+		break;             //查询学生信息
+case 3: dele(head);
+		show_chioce(head);	
+		break;                 
+case 4: change(head);
+        show_chioce(head);
+		break;                  //修改信息 
+case 5: add(head);
+  	   	show_chioce(head);	
+		break;                 //插入学生信息                 //删除学生信息
+case 6: statistics(head);
+        show_chioce(head); 
+        break;                //统计学生信息
+case 7: print(head);
+		show_chioce(head);
+		 break;          
+case 8: found(head);
+		show_chioce(head);
+		break;         //退出系统 */
+case 0:show_chioce(head);
+default: printf("请输入1-8之间的数字，谢谢！\n");
+		show_chioce(head);
+}
+}
+
+struct student                   //定义结构体 
+	{ 
+		int num;
+		char name[20];
+		float score1;
+		float score2;
+		float score3;
+		float aver;
+		struct student *next;
+	}; 
+
+int n;
+struct student *creat(void)                       //创建链表 
+{
+		struct student *head;
+		struct student* p1,* p2;
+		n=0;
+		p1=p2=(struct student*)malloc(LEN);
+		printf("\n请输入学生的学号，姓名，成绩:\n");
+		printf("学号  姓名  C语言  数学  英语\n");
+		scanf("%ld  %s  %f  %f  %f",&p1->num,&p1->name,&p1->score1,&p1->score2,&p1->score3);
+		average(p1);
+		average(p1);
+		head=NULL;
+		while(p1->num!=0)
+	{
+		n=n+1;
+		if(n==1) head=p1;
+		else p2->next=p1;
+		p2=p1;
+		p1=(struct student*)malloc(LEN);
+		printf("学号  姓名  C语言  数学  英语\n");
+		scanf("%ld  %s  %f  %f  %f",&p1->num,&p1->name,&p1->score1,&p1->score2,&p1->score3);
+		average(p1);
+		
+	}
+		p2->next=head;
+		return (head);
+}
+
+void found(struct student *head)                  //写入文件函数 
+{
+	    struct student *p=head;
+		FILE *fp;
+		char filename[10];
+		printf("输入文件名:");
+		scanf("%s",filename);
+		if((fp=fopen(filename,"w"))==NULL)
+	{
+		printf("无法打开此文件\n");
+		exit(0);
+		system("cls");
+	}
+	do
+		{
+			printf("%d,%s,%.2f,%.2f,%.2f,%.2f\n",p->num,p->name,p->score1,p->score2,p->score3,p->aver);
+			fprintf(fp,"%d,%s,%.2f,%.2f,%.2f,%.2f\n",p->num,p->name,p->score1,p->score2,p->score3,p->aver);
+			p=p->next;
+		}
+		while(p!=head);
+		printf("\n");
+		fprintf(fp,"\n");
+		fclose(fp);
+}
+
+
+void search(struct student *head)                 // 查询函数 
+{
+    struct student *p;
+	int a,xue;char xing[20];
+	printf("1.按学号查询\n");
+	printf("2.按姓名查询\n");
+	scanf("%d",&a);
+	if(a!=1&&a!=2)
+	{
+	printf("输入错误，请重新输入:");
+	scanf("%d",&a);
+	system("cls");
+}
+		if(a==1)
+{
+	printf("请输入要查询的学生学号:");
+	scanf("%d",&xue);
+	
+	p=head;
+	do{
+	if(xue==(p->num))
+	printf("%d  %s  %.2f  %.2f %.2f %.2f\n",p->num,p->name,p->score1,p->score2,p->score3,p->aver);
+	if(xue==(p->num)) break;
+	p=p->next;
+	}while(p!=head);
+}
+if(a==2)
+{
+	printf("请输入要查询的学生姓名:");
+	 scanf("%s",xing);
+	 p=head;
+	 do{
+	 if (strcmp(p->name,xing)==0){
+	 printf("%d  %s  %.2f  %.2f %.2f %.2f\n",p->num,p->name,p->score1,p->score2,p->score3,p->aver);
+      break;}
+      p=p->next;
+	 }while(p!=head);
+}
+}
+int searchnum(struct student *head,int nu)                             //nu[] 接收实参姓名 
+	{               
+	struct student *p;
+	p=head;
+	int n=0;
+	do{ n++;                                                                 //此时p==head; 
+		if((p->num)==nu)
+		{
+		 printf("%d  %s  %.2f  %.2f %.2f\n",p->num,p->name,p->score1,p->score2,p->score3);
+        return n;
+		break;
+		}
+		p=p->next;                                                      //第一次时p指向第二项 
+		}while(p!=head);                                                   //当p==head时跳出循环 
+}
+
+int searchname(struct student *head,char *nam){ 
+		struct student *p;
+		int n=0;
+		p=head;
+		do{ n++;
+			if(strcmp(p->name,nam)==0){
+ printf("%d  %s  %.2f  %.2f %.2f %.2f\n",p->num,p->name,p->score1,p->score2,p->score3,p->aver);
+return n;
+break;}
+			p=p->next;
+		}while(p!=head);
+
+}
+
+void dele(struct student *head)                     //删除函数 
+{
+	int n,t=0;
+	struct student *p,*pt;
+	int a,xue;char xing[20];
+	printf("1.按学号删除");
+	printf("2.按姓名删除");
+	scanf("%d",&a);
+	if(a!=1&&a!=2)
+	{
+	printf("输入错误，请重新输入:");
+	scanf("%d",&a);
+	system("cls");
+}
+	if(a==1)
+	{
+		printf("请输入要删除的学生学号");
+		scanf("%d",&xue);
+		p=head;
+		printf("将被删除的信息如下:\n");
+		n=searchnum(head,xue);
+		do{
+			if(n==xue)break;
+			p=p->next;
+		}while(p!=head);
+
+
+	}
+	if(a==2)
+	{
+		printf("请输入你要删除的学生姓名");
+		scanf("%s",xing);
+		 	p=head;
+		 	printf("将被删除的信息如下:\n");
+		 	n=searchname(head,xing);
+		 	do{
+		 	if(strcmp(xing,p->name)==0)break;
+		 		p=p->next ;
+		
+		}while(p!=head);
+
+			 }
+		p=head;
+		for(int i=1;i<n-1;i++)
+		p=p->next;
+		pt=p->next;
+		p->next=pt->next;
+	printf("删除成功\n");	
+	}
+	
+void print(struct student *head)                        //输出全部信息 
+	{
+	struct student*p;
+	p=head;
+	do{
+		 printf("%d  %s  %.2f  %.2f %.2f %.2f\n",p->num,p->name,p->score1,p->score2,p->score3,p->aver);
+		 p=p->next;	 
+	}while(p!=head); 
+}
+ 
+ void average(struct student* p)                             //求平均成绩 
+ {
+ 	p->aver=(p->score1+p->score2+p->score3)/3; 
+ }
+	
+void add(struct student *head)                           //添加函数 
+{
+		struct student* pi,*p1; 
+		printf("请输入你要插入的数据:\n");
+		pi=(struct student*)malloc(LEN);
+		p1=pi;
+		scanf("%ld  %s  %f  %f  %f",&p1->num,&p1->name,&p1->score1,&p1->score2,&p1->score3);
+		average(p1);
+		//average(p);
+		printf("请输入你要插入到的学号:\n");
+		scanf("%d",&n);
+		struct student *p;
+  	    p=head;
+	    int i; 
+	   for(i=1;i<n;i++)
+	   p=p->next;                //循环结束时的p指向第n-1项的首地址 
+	   pi->next=p->next;         //把第n-1项的next赋给待插入项的next 
+	   p->next=pi;	
+}
+
+void change(struct student *head)                     // 修改函数 
+{ 
+    int n;
+    struct student *p,*pt,*pi;
+	printf("请输入你要修改的学生的序号:\n");
+	scanf("%d",&n);
+	p=head;
+	for(int i=1;i<n;i++)
+	p=p->next;
+	printf("请重新进入该生信息:\n");
+		scanf("%ld  %s  %f  %f  %f",&p->num,&p->name,&p->score1,&p->score2,&p->score3);
+		average(p);
+	/*	p=head;
+	for(int i=1;i<n-1;i--){
+		p=p->next;
+	}
+	pi->next=p->next;
+	 p->next=pi;*/ 
+	
+}
+
+void statistics(struct student*head)                                 //统计函数 
+	{                        
+		struct student *p,*pt;
+		p=head;
+		int count[4]={0,0,0,0},n=0,k[4],i;
+		float max[4]={0,0,0,0};
+		printf("统计结果如下\n\n");
+	
+			p=head;
+		n=0,i=1;
+		 do{
+        	n++;
+	
+			if(p->score1<60)
+			{count[i]++;
+			}
+			if(p->score1>max[i]){
+			
+				max[i]=p->score1;
+			k[i]=n;}
+			p=p->next;
+		}while(p!=head);
+	    printf("课程%d的不及格人数为%d\n",i,count[i]);
+	    pt=head;
+		for(int j=1;j<k[i];j++)
+			pt=pt->next;
+			printf("课程1的最大分数学生的成绩如下\n",i);
+		printf("%d  %s  %.2f  %.2f %.2f %.2f\n",pt->num,pt->name,pt->score1,pt->score2,pt->score3,pt->aver);
+        
+		n=0,i=2;
+        do{
+        	n++;
+	
+			if(p->score2<60)
+			{count[i]++;
+			}
+			if(p->score2>max[i]){
+			
+				max[i]=p->score2;
+			k[i]=n;}
+			p=p->next;
+		}while(p!=head);
+	    printf("课程%d的不及格人数为%d\n",i,count[i]);
+	    pt=head;
+		for(int j=1;j<k[i];j++)
+			pt=pt->next;
+			printf("课程1的最大分数学生的成绩如下\n",i);
+		printf("%d  %s  %.2f  %.2f %.2f %.2f\n",pt->num,pt->name,pt->score1,pt->score2,pt->score3,pt->aver);
+		
+		n=0,i=3;
+		do{
+        	n++;
+	
+			if(p->score3<60)
+			{count[i]++;
+			}
+			if(p->score3>max[i]){
+			
+				max[i]=p->score3;
+			k[i]=n;}
+			p=p->next;
+		}while(p!=head);
+	    printf("课程%d的不及格人数为%d\n",i,count[i]);
+	    pt=head;
+		for(int j=1;j<k[i];j++)
+			pt=pt->next;
+			printf("课程1的最大分数学生的成绩如下\n",i);
+		printf("%d  %s  %.2f  %.2f %.2f %.2f\n",pt->num,pt->name,pt->score1,pt->score2,pt->score3,pt->aver);
+    }
+
+int main()                                 //主函数 
+{
+	struct student *p,*head;
+	show_begin();
+	show_chioce(head);
+	head=creat();
+	system("cls");
+	show_chioce(head);
+return 0;
+}
