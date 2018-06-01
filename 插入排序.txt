@@ -1,0 +1,18 @@
+
+void InsertSort(int* arr, int _size)
+{
+ if (arr == NULL || _size <= 0)
+   return;
+ for (int idx = 1; idx < _size; ++idx)
+ {
+   int end = idx - 1;
+   //end为插入之前最后一个节点的下标
+   while (end >= 0 && arr[end] > arr[end + 1])
+   {
+     int tmp = arr[end + 1];//保存待插入的结点
+     arr[end + 1] = arr[end];//将待插入结点之前的元素后移
+     arr[end] = tmp;//插入待插入结点
+     end--;
+   }
+ }
+}
